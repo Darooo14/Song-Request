@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Song Request — 3D</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#070719;
+  --bg2:#0d0b2b;
+  --panel:rgba(18,17,55,.68);
+  --line:rgba(139,120,255,.28);
+  --text:#f8f7ff;
+  --muted:#aaa7cf;
+  --purple:#9b5cff;
+  --blue:#31b9ff;
+  --pink:#ff4fa3;
+  --cyan:#35e8ff;
+  --green:#72e6af;
+  --red:#ff7e9c;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  color:var(--text);
+  font-family:"DM Sans",system-ui,sans-serif;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(118,66,255,.22),transparent 28%),
+    radial-gradient(circle at 85% 15%,rgba(0,190,255,.16),transparent 25%),
+    radial-gradient(circle at 50% 100%,rgba(255,45,150,.13),transparent 35%),
+    linear-gradient(135deg,var(--bg),var(--bg2));
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.background{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:-5;
+}
+
+.grid{
+  position:absolute;
+  width:140%;
+  height:80%;
+  left:-20%;
+  bottom:-25%;
+  opacity:.25;
+  transform:
+    perspective(650px)
+    rotateX(66deg);
+  background-image:
+    linear-gradient(rgba(120,100,255,.22) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(120,100,255,.22) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:linear-gradient(to top,black,transparent);
+}
+
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(2px);
+  animation:float 8s ease-in-out infinite;
+}
+
+.orb.one{
+  width:320px;
+  height:320px;
+  background:radial-gradient(circle,rgba(153,70,255,.25),transparent 70%);
+  left:-100px;
+  top:10%;
+}
+
+.orb.two{
+  width:400px;
+  height:400px;
+  background:radial-gradient(circle,rgba(0,200,255,.18),transparent 70%);
+  right:-150px;
+  top:20%;
+  animation-delay:-3s;
+}
+
+.orb.three{
+  width:350px;
+  height:350px;
+  background:radial-gradient(circle,rgba(255,50,160,.16),transparent 70%);
+  left:40%;
+  bottom:-150px;
+  animation-delay:-5s;
+}
+
+@keyframes float{
+  0%,100%{
+    transform:translate3d(0,0,0);
+  }
+  50%{
+    transform:translate3d(0,-35px,0);
+  }
+}
+
+/* =========================
+   PARTICLES
+========================= */
+
+.particles{
+  position:absolute;
+  inset:0;
+}
+
+.particle{
+  position:absolute;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:
+    0 0 8px #fff,
+    0 0 18px var(--purple);
+  opacity:.55;
+  animation:particleFloat linear infinite;
+}
+
+@keyframes particleFloat{
+  from{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+  15%{
+    opacity:.6;
+  }
+  85%{
+    opacity:.6;
+  }
+  to{
+    transform:translateY(-20vh);
+    opacity:0;
+  }
+}
+
+/* =========================
+   PAGE
+========================= */
+
+main{
+  width:min(1120px,calc(100% - 30px));
+  margin:auto;
+  padding:45px 0 70px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  text-align:center;
+  padding:35px 10px 25px;
+  perspective:1000px;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:#b9b1ff;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.live-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#55ffb0;
+  box-shadow:0 0 14px #55ffb0;
+  animation:pulse 1.6s infinite;
+}
+
+@keyframes pulse{
+  50%{
+    transform:scale(.55);
+    opacity:.45;
+  }
+}
+
+h1{
+  margin:0;
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-size:clamp(3.3rem,10vw,7.3rem);
+  line-height:.82;
+  letter-spacing:-.055em;
+  text-shadow:
+    0 4px 0 #342077,
+    0 8px 25px rgba(130,70,255,.45);
+  transform:translateZ(35px);
+}
+
+h1 span{
+  display:block;
+  background:linear-gradient(
+    100deg,
+    #fff,
+    #d9ceff 35%,
+    #8ddfff 65%,
+    #b66cff
+  );
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.subtitle{
+  max-width:580px;
+  margin:25px auto 0;
+  color:var(--muted);
+  font-size:1rem;
+  line-height:1.7;
+}
+
+/* =========================
+   3D STAGE
+========================= */
+
+.stage{
+  position:relative;
+  min-height:680px;
+  margin-top:30px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  perspective:1400px;
+}
+
+/* Vinyl */
+
+.vinyl{
+  position:absolute;
+  left:4%;
+  top:50%;
+  width:310px;
+  height:310px;
+  border-radius:50%;
+  transform:
+    translateY(-50%)
+    rotateX(58deg)
+    rotateZ(-18deg);
+  background:
+    repeating-radial-gradient(
+      circle,
+      #05050b 0 5px,
+      #10101a 6px 8px
+    );
+  border:2px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 0 0 8px rgba(139,92,246,.08),
+    0 0 40px rgba(116,75,255,.5),
+    0 35px 70px rgba(0,0,0,.7);
+  animation:recordSpin 10s linear infinite;
+}
+
+@keyframes recordSpin{
+  to{
+    transform:
+      translateY(-50%)
+      rotateX(58deg)
+      rotateZ(342deg);
+  }
+}
+
+.vinyl::before{
+  content:"";
+  position:absolute;
+  inset:28%;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 30%,#ffe8ff,#b45cff 35%,#5312a5 70%);
+  box-shadow:
+    0 0 25px rgba(180,92,255,.7);
+}
+
+.vinyl::after{
+  content:"";
+  position:absolute;
+  width:18px;
+  height:18px;
+  left:calc(50% - 9px);
+  top:calc(50% - 9px);
+  border-radius:50%;
+  background:#080714;
+  border:3px solid #ddd;
+}
+
+.headphones{
+  position:absolute;
+  left:5%;
+  bottom:6%;
+  font-size:105px;
+  filter:
+    drop-shadow(0 0 14px rgba(60,190,255,.7))
+    drop-shadow(0 20px 25px rgba(0,0,0,.7));
+  transform:rotate(-13deg) translateZ(50px);
+  animation:headFloat 4s ease-in-out infinite;
+}
+
+@keyframes headFloat{
+  50%{
+    transform:rotate(-8deg) translateY(-12px);
+  }
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card-wrap{
+  width:min(530px,100%);
+  position:relative;
+  z-index:5;
+  transform-style:preserve-3d;
+  transition:transform .18s ease-out;
+}
+
+.card{
+  position:relative;
+  padding:30px;
+  border:1px solid rgba(150,130,255,.4);
+  border-radius:28px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(37,34,91,.78),
+      rgba(12,11,37,.76)
+    );
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.55),
+    0 0 50px rgba(114,78,255,.16),
+    inset 0 1px 0 rgba(255,255,255,.13);
+  transform-style:preserve-3d;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:28px;
+  padding:1px;
+  background:linear-gradient(
+    120deg,
+    rgba(255,255,255,.35),
+    transparent 30%,
+    rgba(60,210,255,.35),
+    rgba(255,60,180,.3)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+
+.card-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:24px;
+}
+
+.card-icon{
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  font-size:23px;
+  background:linear-gradient(135deg,#a75cff,#31b9ff);
+  box-shadow:0 0 25px rgba(91,110,255,.45);
+}
+
+.card-title h2{
+  margin:0;
+  font-size:1.35rem;
+}
+
+.card-title p{
+  margin:3px 0 0;
+  color:var(--muted);
+  font-size:.82rem;
+}
+
+/* =========================
+   FORM
+========================= */
+
+form{
+  display:grid;
+  gap:15px;
+}
+
+label{
+  display:grid;
+  gap:7px;
+  font-size:.82rem;
+  font-weight:700;
+  color:#ddd9ff;
+}
+
+input,
+textarea{
+  width:100%;
+  border:1px solid rgba(136,122,255,.35);
+  border-radius:14px;
+  padding:14px 15px;
+  color:white;
+  background:rgba(4,4,20,.62);
+  font:inherit;
+  transition:
+    border-color .2s,
+    box-shadow .2s,
+    transform .2s;
+}
+
+textarea{
+  min-height:95px;
+  resize:vertical;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#68658f;
+}
+
+input:focus,
+textarea:focus{
+  outline:none;
+  border-color:#8b72ff;
+  box-shadow:
+    0 0 0 3px rgba(125,92,255,.12),
+    0 0 25px rgba(111,82,255,.12);
+  transform:translateZ(5px);
+}
+
+.opt{
+  color:#77739e;
+  font-weight:500;
+}
+
+.submit{
+  position:relative;
+  overflow:hidden;
+  border:0;
+  border-radius:15px;
+  padding:16px;
+  margin-top:3px;
+  color:white;
+  font:inherit;
+  font-weight:800;
+  font-size:1rem;
+  cursor:pointer;
+  background:linear-gradient(
+    100deg,
+    #a84fff,
+    #6569ff,
+    #18c7ff
+  );
+  box-shadow:
+    0 10px 30px rgba(82,84,255,.35),
+    inset 0 1px 0 rgba(255,255,255,.35);
+  transition:
+    transform .15s,
+    box-shadow .15s;
+}
+
+.submit::before{
+  content:"";
+  position:absolute;
+  width:100px;
+  height:200%;
+  top:-50%;
+  left:-140px;
+  background:rgba(255,255,255,.28);
+  transform:rotate(20deg);
+  transition:left .5s;
+}
+
+.submit:hover{
+  transform:translateY(-3px) translateZ(8px);
+  box-shadow:
+    0 16px 40px rgba(82,84,255,.5),
+    inset 0 1px 0 rgba(255,255,255,.4);
+}
+
+.submit:hover::before{
+  left:120%;
+}
+
+.submit:active{
+  transform:scale(.98);
+}
+
+.submit:disabled{
+  opacity:.6;
+  cursor:wait;
+}
+
+#status{
+  min-height:25px;
+  margin:2px 0 0;
+  text-align:center;
+  font-size:.88rem;
+  font-weight:700;
+}
+
+#status.ok{
+  color:var(--green);
+}
+
+#status.err{
+  color:var(--red);
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:45px;
+}
+
+.feature{
+  padding:22px;
+  border-radius:20px;
+  border:1px solid rgba(135,120,255,.18);
+  background:rgba(17,15,47,.52);
+  backdrop-filter:blur(15px);
+  box-shadow:0 20px 50px rgba(0,0,0,.22);
+  transition:
+    transform .25s,
+    border-color .25s;
+}
+
+.feature:hover{
+  transform:translateY(-8px) rotateX(4deg);
+  border-color:rgba(139,120,255,.5);
+}
+
+.feature-icon{
+  font-size:27px;
+  margin-bottom:12px;
+}
+
+.feature h3{
+  margin:0 0 5px;
+  font-size:1rem;
+}
+
+.feature p{
+  margin:0;
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.6;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  text-align:center;
+  margin-top:45px;
+  color:#65618e;
+  font-size:.78rem;
+}
+
+footer strong{
+  color:#aaa6d2;
+}
+
+/* =========================
+   HIDDEN BOT FIELD
+========================= */
+
+.hp{
+  position:absolute!important;
+  left:-9999px!important;
+  width:1px!important;
+  height:1px!important;
+  overflow:hidden!important;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+  main{
+    padding-top:25px;
+  }
+
+  .stage{
+    min-height:auto;
+    padding:30px 0;
+  }
+
+  .vinyl{
+    width:220px;
+    height:220px;
+    left:-80px;
+    top:90px;
+    opacity:.45;
+  }
+
+  .headphones{
+    display:none;
+  }
+
+  .features{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+
+  body{
+    padding:0;
+  }
+
+  main{
+    width:calc(100% - 22px);
+    padding-bottom:40px;
+  }
+
+  .hero{
+    padding-top:30px;
+  }
+
+  h1{
+    font-size:clamp(3rem,17vw,5rem);
+  }
+
+  .subtitle{
+    font-size:.9rem;
+  }
+
+  .stage{
+    margin-top:5px;
+  }
+
+  .card{
+    padding:21px;
+    border-radius:22px;
+  }
+
+  .card::before{
+    border-radius:22px;
+  }
+
+  .card-title{
+    margin-bottom:19px;
+  }
+
+  .vinyl{
+    width:170px;
+    height:170px;
+    left:-65px;
+    top:40px;
+  }
+
+  .features{
+    margin-top:15px;
+  }
+
+  .feature{
+    padding:18px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition:none!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+
+  <div class="grid"></div>
+
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <div class="particles">
+    <i class="particle" style="left:8%;animation-duration:12s;animation-delay:-2s"></i>
+    <i class="particle" style="left:18%;animation-duration:17s;animation-delay:-7s"></i>
+    <i class="particle" style="left:31%;animation-duration:14s;animation-delay:-4s"></i>
+    <i class="particle" style="left:45%;animation-duration:19s;animation-delay:-10s"></i>
+    <i class="particle" style="left:58%;animation-duration:13s;animation-delay:-6s"></i>
+    <i class="particle" style="left:72%;animation-duration:18s;animation-delay:-12s"></i>
+    <i class="particle" style="left:86%;animation-duration:15s;animation-delay:-3s"></i>
+    <i class="particle" style="left:94%;animation-duration:20s;animation-delay:-9s"></i>
+  </div>
+
+</div>
+
+<main>
+
+  <section class="hero">
+
+    <div class="eyebrow">
+      <span class="live-dot"></span>
+      SONG REQUEST • LIVE
+    </div>
+
+    <h1>
+      <span>Mau dengar</span>
+      <span>lagu apa?</span>
+    </h1>
+
+    <p class="subtitle">
+      Tulis lagu favoritmu dan kirim request.
+      Request akan langsung masuk ke sistem dan siap diputar.
+    </p>
+
+  </section>
+
+
+  <section class="stage">
+
+    <div class="vinyl"></div>
+
+    <div class="headphones">🎧</div>
+
+    <div class="card-wrap" id="cardWrap">
+
+      <div class="card">
+
+        <div class="card-title">
+
+          <div class="card-icon">
+            🎵
+          </div>
+
+          <div>
+            <h2>Kirim Request</h2>
+            <p>Isi lagu yang ingin kamu dengar</p>
+          </div>
+
+        </div>
+
+
+        <form id="f" novalidate>
+
+          <label>
+            Judul lagu
+
+            <input
+              name="judul"
+              required
+              maxlength="120"
+              autocomplete="off"
+              placeholder="Contoh: Shape of My Heart"
+            >
+          </label>
+
+
+          <label>
+            Penyanyi
+            <span class="opt">(opsional)</span>
+
+            <input
+              name="artis"
+              maxlength="120"
+              autocomplete="off"
+              placeholder="Contoh: Sting"
+            >
+          </label>
+
+
+          <label>
+            Nama kamu
+            <span class="opt">(opsional)</span>
+
+            <input
+              name="nama"
+              maxlength="60"
+              autocomplete="off"
+              placeholder="Biar bisa disebut saat lagu diputar"
+            >
+          </label>
+
+
+          <label>
+            Pesan
+            <span class="opt">(opsional)</span>
+
+            <textarea
+              name="pesan"
+              maxlength="300"
+              placeholder="Tulis salam atau dedikasi 🎶"
+            ></textarea>
+          </label>
+
+
+          <div class="hp" aria-hidden="true">
+            <input
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+            >
+          </div>
+
+
+          <button
+            class="submit"
+            type="submit"
+            id="btn"
+          >
+            🎧 &nbsp; Kirim Request
+          </button>
+
+
+          <p
+            id="status"
+            role="status"
+            aria-live="polite"
+          ></p>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="features">
+
+    <article class="feature">
+
+      <div class="feature-icon">⚡</div>
+
+      <h3>Simple & Cepat</h3>
+
+      <p>
+        Tinggal isi lagu lalu kirim.
+        Tidak perlu login atau ribet.
+      </p>
+
+    </article>
+
+
+    <article class="feature">
+
+      <div class="feature-icon">☁️</div>
+
+      <h3>Langsung Tersimpan</h3>
+
+      <p>
+        Request langsung masuk ke
+        Google Sheets secara otomatis.
+      </p>
+
+    </article>
+
+
+    <article class="feature">
+
+      <div class="feature-icon">🎶</div>
+
+      <h3>Semua Genre</h3>
+
+      <p>
+        Pop, rock, hip-hop, soundtrack,
+        atau lagu favoritmu.
+      </p>
+
+    </article>
+
+  </section>
+
+
+  <footer>
+    <strong>SONG REQUEST</strong>
+    &nbsp;•&nbsp;
+    Powered by Google Sheets
+    &nbsp;•&nbsp;
+    Enjoy the music 🎧
+  </footer>
+
+</main>
+
+
+<script>
+
+/* ==========================================
+   GOOGLE APPS SCRIPT
+========================================== */
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyTMkEnQgTi_WREUjMFuhBf2x4qKG-_lc5Y1vqECISFlw_KYnIk17BmCZQBUnFrzS8jOA/exec";
+
+
+/* ==========================================
+   REQUEST LIMIT
+   1 REQUEST / DEVICE / 1 JAM
+========================================== */
+
+const LIMIT_MS = 60 * 60 * 1000;
+
+const KEY = "lastSongRequest";
+
+
+function sisaWaktu(){
+
+  try{
+
+    const last =
+      Number(localStorage.getItem(KEY) || 0);
+
+    return Math.max(
+      0,
+      last + LIMIT_MS - Date.now()
+    );
+
+  }catch(e){
+
+    return 0;
+
+  }
+
+}
+
+
+function tandaiTerkirim(){
+
+  try{
+
+    localStorage.setItem(
+      KEY,
+      String(Date.now())
+    );
+
+  }catch(e){}
+
+}
+
+
+function format(ms){
+
+  const menit =
+    Math.ceil(ms / 60000);
+
+  return menit >= 60
+    ? "1 jam"
+    : menit + " menit";
+
+}
+
+
+/* ==========================================
+   ELEMENTS
+========================================== */
+
+const form =
+  document.getElementById("f");
+
+const button =
+  document.getElementById("btn");
+
+const status =
+  document.getElementById("status");
+
+const card =
+  document.getElementById("cardWrap");
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+function say(message, className){
+
+  status.textContent = message;
+
+  status.className =
+    className || "";
+
+}
+
+
+/* ==========================================
+   SUBMIT
+========================================== */
+
+form.addEventListener(
+  "submit",
+  async function(e){
+
+    e.preventDefault();
+
+
+    const data =
+      Object.fromEntries(
+        new FormData(form)
+      );
+
+
+    /* BOT CHECK */
+
+    if(data.website){
+
+      return;
+
+    }
+
+
+    /* EMPTY TITLE */
+
+    if(!data.judul.trim()){
+
+      say(
+        "Isi judul lagunya dulu 🎵",
+        "err"
+      );
+
+      form.judul.focus();
+
+      return;
+
+    }
+
+
+    /* LIMIT */
+
+    const sisa =
+      sisaWaktu();
+
+
+    if(sisa > 0){
+
+      say(
+        "Kamu sudah request. Coba lagi dalam " +
+        format(sisa) +
+        ".",
+        "err"
+      );
+
+      return;
+
+    }
+
+
+    /* URL CHECK */
+
+    if(
+      SCRIPT_URL.startsWith("PASTE")
+    ){
+
+      say(
+        "URL Apps Script belum dipasang.",
+        "err"
+      );
+
+      return;
+
+    }
+
+
+    /* LOADING */
+
+    button.disabled = true;
+
+    button.textContent =
+      "⏳  Mengirim...";
+
+    say(
+      "Request sedang dikirim..."
+    );
+
+
+    try{
+
+      await fetch(
+        SCRIPT_URL,
+        {
+          method:"POST",
+
+          mode:"no-cors",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:JSON.stringify({
+
+            judul:data.judul,
+
+            artis:data.artis,
+
+            nama:data.nama,
+
+            pesan:data.pesan
+
+          })
+
+        }
+      );
+
+
+      /* SUCCESS */
+
+      tandaiTerkirim();
+
+      form.reset();
+
+      say(
+        "✓ Request terkirim! Terima kasih 🎶",
+        "ok"
+      );
+
+
+    }catch(error){
+
+      console.error(error);
+
+      say(
+        "Gagal mengirim. Cek koneksi lalu coba lagi.",
+        "err"
+      );
+
+    }finally{
+
+      button.disabled = false;
+
+      button.textContent =
+        "🎧  Kirim Request";
+
+    }
+
+  }
+);
+
+
+/* ==========================================
+   3D MOUSE PARALLAX
+========================================== */
+
+let mouseX = 0;
+let mouseY = 0;
+
+let targetX = 0;
+let targetY = 0;
+
+
+if(
+  window.matchMedia(
+    "(pointer:fine)"
+  ).matches
+){
+
+  document.addEventListener(
+    "mousemove",
+    function(e){
+
+      targetX =
+        (e.clientX / window.innerWidth - .5)
+        * 12;
+
+      targetY =
+        (e.clientY / window.innerHeight - .5)
+        * -12;
+
+    }
+  );
+
+
+  function animate3D(){
+
+    mouseX +=
+      (targetX - mouseX) * .08;
+
+    mouseY +=
+      (targetY - mouseY) * .08;
+
+
+    card.style.transform =
+      `rotateX(${mouseY * .35}deg)
+       rotateY(${mouseX * .35}deg)`;
+
+
+    requestAnimationFrame(
+      animate3D
+    );
+
+  }
+
+
+  animate3D();
+
+}
+
+
+/* ==========================================
+   INPUT 3D EFFECT
+========================================== */
+
+document
+  .querySelectorAll("input, textarea")
+  .forEach(function(input){
+
+    input.addEventListener(
+      "focus",
+      function(){
+
+        card.style.transform =
+          "translateZ(8px)";
+
+      }
+    );
+
+    input.addEventListener(
+      "blur",
+      function(){
+
+        card.style.transform =
+          "";
+
+      }
+    );
+
+  });
+
+</script>
+
+</body>
+</html>
